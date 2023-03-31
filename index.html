@@ -15,7 +15,7 @@
             <div class="container py-5">
                 <div class="row">
                     <!-- left -->
-                    <div class="users col-4">
+                    <div class="users col-4 p-0">
                         <header class="d-flex justify-content-between align-items-center p-3">
                             <div class="userprofile d-flex align-items-center">
                                 <div class="circle">
@@ -29,7 +29,7 @@
                                 <i class="fa-solid fa-ellipsis-vertical mx-2"></i>
                             </div>
                         </header>
-                        <main>
+                        <main class="overflow-hidden">
                             <div class="notific d-flex p-3">
                                 <div class="circle d-flex justify-content-center align-items-center mx-2">
                                     <i class="fa-solid fa-bell-slash fa-2x"></i>
@@ -64,35 +64,40 @@
                     </div>
 
                     <!-- right -->
-                    <div class="mess col-8">
-                        <header>
-                            <div class="user_texting">
-                                <img src="" alt="">
-                                <h4></h4>
-                                <p></p>
+                    <div class="mess col-8 p-0">
+                        <header class="p-3 d-flex justify-content-between">
+                            <div class="user_texting d-flex align-items-center ">
+                                <div class="circle ">
+                                    <img :src="contacts[activechat].avatar" alt="">
+                                </div>
+                                <div class="info_acces">
+                                    <p class="m-0 fw-bold">{{contacts[activechat].name}}</p>
+                                    <p class="m-0">ultimo accesso :{{contacts[activechat].messages[0].date}} </p>
+                                </div>
                             </div>
-                            <div class="nav_texing">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <i class="fa-solid fa-paperclip"></i>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            <div class="nav_texing d-flex align-items-center">
+                                <i class="fa-solid fa-magnifying-glass "></i>
+                                <i class="fa-solid fa-paperclip "></i>
+                                <i class="fa-solid fa-ellipsis-vertical "></i>
                             </div>
                         </header>
-                        <main>
+                        <main class="position-relative">
                             <div class="area_texting">
         
                             </div>
+                            <footer class="w-100 position-absolute d-flex p-2">
+                                <div class="icon_menu px-3">
+                                    <i class="fa-regular fa-face-smile"></i>
+                                </div>
+                                <div class="input_area w-100">
+                                    <input type="text" class="w-100">
+                                </div>
+                                <div class="icon-rec px-3">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </div>
+                            </footer>
                         </main>
-                        <footer>
-                            <div class="icon_menu">
-                                <i class="fa-regular fa-face-smile"></i>
-                            </div>
-                            <div class="input_area">
-                                <input type="text">
-                            </div>
-                            <div class="icon-rec">
-                                <i class="fa-solid fa-microphone"></i>
-                            </div>
-                        </footer>
+                        
                     </div>
                 </div>
             </div>

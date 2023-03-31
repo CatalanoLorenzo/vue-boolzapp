@@ -165,7 +165,8 @@ const app = createApp({
                     }
                 ],
             }
-        ]
+        ],
+        activechat:0
     }
   },
   methods: {

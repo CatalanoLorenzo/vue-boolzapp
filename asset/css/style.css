@@ -14,8 +14,10 @@
 }
 
 /* Users */
-.users header{
+.users header,.mess header{
     background-color: #eaeaea;
+    height: 10vh;
+    border: 1px solid lightgray;
 }
 /* userprofile */
 .circle img{
@@ -26,7 +28,7 @@
     color: #b1b1b1;
 }
 .users main, .mess main{
-    height: 60vh;
+    height: 80vh;
 }
 /* notific */
 .users main .notific{
@@ -39,9 +41,18 @@
 
     color: #8edafc;
 }
-.area_texting{
-    background-image: url(.../img/mine.jpg);
+.mess main{
+    background-image: url(../img/mine.jpg);
 }
 .show_users{
     height: 100%;
+}
+.nav_texing i{
+ font-size: 1.25rem;
+ color: #b1b1b1;
+}
+.mess main footer{
+    bottom: 0;
+    background-color: #eaeaea;
+    
 }
