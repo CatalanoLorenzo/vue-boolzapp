@@ -12,7 +12,7 @@
 <body>
     <div class="background">
         <div id="app">
-            <div class="container">
+            <div class="container py-5">
                 <div class="row">
                     <!-- left -->
                     <div class="users col-4">
@@ -45,8 +45,19 @@
                                     <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" aria-describedby="basic-addon1">
                                   </div>
                             </div>
-                            <div class="show_user">
-        
+                            <div class="show_users">
+                                <div class="show_user d-flex" v-for="(user,index) in contacts">
+                                    <div class="avatar">
+                                        <div class="circle">
+                                            <img :src="user.avatar" :alt="user.name">
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        <h4>{{user.name}}</h4>
+                                        <p><!-- {{user.message[message.lenght].data}} --></p>
+                                    </div>
+
+                                </div>
                             </div>
                         </main>
                     </div>
