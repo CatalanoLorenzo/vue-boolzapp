@@ -19,7 +19,7 @@
                         <header class="d-flex justify-content-between align-items-center p-3">
                             <div class="userprofile d-flex align-items-center">
                                 <div class="circle">
-                                    <img src="./asset/img/avatar_io.jpg" alt="">
+                                    <img src="./img/avatar_io.jpg" alt="">
                                 </div>
                                 <h4 class="">Sofia</h4>
                             </div>
@@ -45,16 +45,17 @@
                                     <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" aria-describedby="basic-addon1">
                                   </div>
                             </div>
-                            <div class="show_users">
-                                <div class="show_user d-flex" v-for="(user,index) in contacts">
-                                    <div class="avatar">
+                            <div class="show_users overflow-auto">
+                                <div class="show_user d-flex align-items-center bg-white p-2" v-for="(user,index) in contacts">
+                                    <div class="avatar px-3">
                                         <div class="circle">
                                             <img :src="user.avatar" :alt="user.name">
                                         </div>
                                     </div>
-                                    <div class="info">
-                                        <h4>{{user.name}}</h4>
-                                        <p><!-- {{user.message[message.lenght].data}} --></p>
+                                    <div class="info d-flex flex-column">
+                                        <p class="m-0 p-0 fw-bold">{{user.name}}</p>
+                                        <p class="m-0 p-0 co">ultimo messaggio inviato</p>
+                                        <p class="m-0 p-0">{{user.messages[0].date}}</p>
                                     </div>
 
                                 </div>

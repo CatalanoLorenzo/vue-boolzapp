@@ -25,6 +25,9 @@
 .navicon{
     color: #b1b1b1;
 }
+.users main, .mess main{
+    height: 60vh;
+}
 /* notific */
 .users main .notific{
     background-color: #8edafc;
@@ -36,6 +39,9 @@
 
     color: #8edafc;
 }
-/* main .container_search button{
-border:  1px solid gray;
-} */
+.area_texting{
+    background-image: url(.../img/mine.jpg);
+}
+.show_users{
+    height: 100%;
+}
