@@ -170,7 +170,9 @@ const app = createApp({
     }
   },
   methods: {
-   
+   chage_activeChat(index){
+    this.activechat = index
+   }
     }
   
 })
