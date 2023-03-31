@@ -166,12 +166,22 @@ const app = createApp({
                 ],
             }
         ],
-        activechat:0
+        activechat: 0,
+        messageNew: ''
     }
   },
   methods: {
    chage_activeChat(index){
     this.activechat = index
+   },
+   genereted_new_mess(){
+    const textobject = {
+        date: '',
+        message: this.messageNew,
+        status: 'sent'
+    };
+    this.contacts[this.activechat].message.push(textobject);
+    this.messageNew = ''
    }
     }
   
