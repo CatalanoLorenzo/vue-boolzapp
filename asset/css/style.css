@@ -24,3 +24,14 @@
 .navicon{
     color: #b1b1b1;
 }
+/* notific */
+.users main .notific{
+    background-color: #8edafc;
+}
+.notific .circle {
+    background-color: white;
+}
+.notific .circle i{
+    
+    color: #8edafc;
+}
