@@ -1,4 +1,26 @@
+/* utilitis */
+.circle{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* background */
 .background{
     height: 100vh;
     background: linear-gradient(to bottom, #009688 10%, #dcdbd2 10%);
+}
+
+/* Users */
+.users header{
+    background-color: #eaeaea;
+}
+/* userprofile */
+.circle img{
+    width: 100%;
+    object-fit: cover;
+}
+.navicon{
+    color: #b1b1b1;
 }
