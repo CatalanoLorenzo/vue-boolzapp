@@ -183,6 +183,17 @@ const app = createApp({
     this.newobjet.message = this.messageNew
     this.contacts[this.activechat].messages.push( {...this.newobjet} );
     this.messageNew = ''
+   },
+   ask_new_mess(){
+    this.newobjet.message = 'ok'
+    this.newobjet.status = 'received'
+    this.contacts[this.activechat].messages.push( {...this.newobjet} );
+    this.newobjet.message = ''
+    this.newobjet.status = 'sent'
+   },
+   new_mess_full(){
+    this.genereted_new_mess();
+    setTimeout(() =>{this.ask_new_mess()},1000);
    }
     }
   
