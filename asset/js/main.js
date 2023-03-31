@@ -167,7 +167,12 @@ const app = createApp({
             }
         ],
         activechat: 0,
-        messageNew: ''
+        messageNew: '',
+        newobjet:{
+            date: '',
+            message: '',
+            status: 'sent'
+        }
     }
   },
   methods: {
@@ -175,12 +180,8 @@ const app = createApp({
     this.activechat = index
    },
    genereted_new_mess(){
-    const textobject = {
-        date: '',
-        message: this.messageNew,
-        status: 'sent'
-    };
-    this.contacts[this.activechat].message.push(textobject);
+    this.newobjet.message = this.messageNew
+    this.contacts[this.activechat].messages.push( {...this.newobjet} );
     this.messageNew = ''
    }
     }
