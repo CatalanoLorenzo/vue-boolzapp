@@ -45,8 +45,8 @@
                                     <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" v-model="search"  >
                                   </div>
                             </div>
-                            <div class="show_users overflow-auto" >
-                                <div class="show_user " v-for="(user,index) in contacts" @click="chage_activeChat(index)">
+                            <div class="show_users overflow-auto bg-white" >
+                                <div class="show_user bg-white " v-for="(user,index) in contacts" @click="chage_activeChat(index)">
                                     <div class="d-flex align-items-center bg-white p-2" v-if="user.visible">
                                         <div class="avatar px-3">
                                             <div class="circle">
