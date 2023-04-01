@@ -42,24 +42,26 @@
                             <div class="container_search bg-white p-2">
                                 <div class="input-group ">
                                     <span class="input-group-text bg-white border-end-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                    <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" aria-describedby="basic-addon1" >
+                                    <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" v-model="search"  >
                                   </div>
                             </div>
-                            <div class="show_users overflow-auto">
-                                <div class="show_user d-flex align-items-center bg-white p-2" v-for="(user,index) in contacts" @click="chage_activeChat(index)">
-                                    <div class="avatar px-3">
-                                        <div class="circle">
-                                            <img :src="user.avatar" :alt="user.name">
+                            <div class="show_users overflow-auto" >
+                                <div class="show_user " v-for="(user,index) in contacts" @click="chage_activeChat(index)">
+                                    <div class="d-flex align-items-center bg-white p-2" v-if="user.visible">
+                                        <div class="avatar px-3">
+                                            <div class="circle">
+                                                <img :src="user.avatar" :alt="user.name">
+                                            </div>
+                                        </div>
+                                        <div class="info d-flex flex-column">
+                                            <p class="m-0 p-0 fw-bold">{{user.name}}</p>
+                                            <p class="m-0 p-0 co">ultimo messaggio inviato</p>
+                                            <p class="m-0 p-0">{{user.messages[0].date}}</p>
                                         </div>
                                     </div>
-                                    <div class="info d-flex flex-column">
-                                        <p class="m-0 p-0 fw-bold">{{user.name}}</p>
-                                        <p class="m-0 p-0 co">ultimo messaggio inviato</p>
-                                        <p class="m-0 p-0">{{user.messages[0].date}}</p>
-                                    </div>
-
                                 </div>
                             </div>
+                            
                         </main>
                     </div>
 
