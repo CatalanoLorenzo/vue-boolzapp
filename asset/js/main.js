@@ -168,6 +168,7 @@ const app = createApp({
             ],
             activechat: 0,
             messageNew: '',
+            data : '',
             newobjet: {
                 date: '',
                 message: '',
@@ -175,7 +176,9 @@ const app = createApp({
             },
             search: '',
             activeSearch: false,
-            arrayOfSearch:  []
+            showMenus : false,
+            lastAcces : '',
+            last_enter : ''
         }
     },
     methods: {
@@ -183,6 +186,8 @@ const app = createApp({
             this.activechat = index
         },
         genereted_new_mess() {
+            let now = this.datenow()
+            this.newobjet.date = now
             this.newobjet.message = this.messageNew
             this.contacts[this.activechat].messages.push({ ...this.newobjet });
             this.messageNew = ''
@@ -222,23 +227,62 @@ const app = createApp({
             } */
     
         },
+        showmenu(){
+            this.showMenus = !this.showMenus
+            
+        },
+        removemess(i){
+            this.contacts[this.activechat].messages.splice(i,1)
+        },
+        logremove(i){
+            console.log(i);
+            console.log(this.contacts[this.activechat].messages);
+            console.log(this.contacts[this.activechat].messages[i]);
+        },
+        lastenter(contatto){
+            let position_last_mess = (contatto.messages.length) - 1
+            console.log(position_last_mess);
+            let lastenter2 = String(contatto.messages[position_last_mess].date)
+            console.log(lastenter2);
+            lastenter2 = lastenter2.substring(11,16)
+            this.lastAcces = lastenter2
+            return this.lastAcces
+        },
         
-
+        last_acces(){
+            let position_last_mess = (this.contacts[this.activechat].messages.length) - 1
+            let lastenter2 = String(this.contacts[this.activechat].messages[position_last_mess].date)
+            lastenter2 = lastenter2.substring(11,16)
+            this.last_enter = lastenter2
+            return this.last_enter
+        },
+        datenow(){
+            
+            let giorno = new Date().getDate()
+            let mese = new Date().getMonth()
+            let anno = new Date().getFullYear()
+            let ora = new Date().getHours()
+            let minuti = new Date().getMinutes()
+            return ` ${giorno}/0${mese}/${anno} ${ora}:${minuti}:00 `
+           
+        },
     },
     computed:{
         search_name() {
-            if(this.search != ''){
+            if(this.search != '' && this.contacts[this.activechat].messages.length > 1){
                 this.confronto()
+            
             }else{
                 this.contacts.forEach(contatto => {
                     contatto.visible = true
+                    
                 })
             }
             
-        }
+        },
+      
     },
     mounted() {
-        
         
     }
 })
