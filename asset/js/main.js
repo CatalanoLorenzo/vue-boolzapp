@@ -209,29 +209,9 @@ const app = createApp({
             setTimeout(() => { this.ask_new_mess() }, 1000);
         },
         
-        confronto(){
-            /* if(this.search != ''){ */
-            this.contacts.forEach(contatto => {
-                if (contatto.name.toLowerCase().includes(this.search.toLowerCase())) {
-                    console.log('la parola cercata si trova dentro array');
-                    console.log(contatto.name.toLowerCase().substring(0,this.search.length) + '  ' + contatto.name);
-                    console.log(contatto.visible);
-                    contatto.visible = true
-                    console.log(contatto.visible);
-                }else{
-                    console.log(this.search.toLowerCase() + '=' + contatto.name.toLowerCase().substring(0,this.search.length) + '  ' + contatto.name);
-                    console.log('non è uguale');
-                    console.log(contatto.visible);
-                    contatto.visible = false
-                    console.log(contatto.visible);
-                }
-            })
-            return true
-            /*} else{
-                return  false
-            } */
+        
     
-        },
+        
         showmenu(){
             this.showMenus = !this.showMenus
             
@@ -311,6 +291,28 @@ const app = createApp({
             }
             
         },
+        confronto(){
+            /* if(this.search != ''){ */
+            this.contacts.forEach(contatto => {
+                if (contatto.name.toLowerCase().includes(this.search.toLowerCase())) {
+                    console.log('la parola cercata si trova dentro array');
+                    console.log(contatto.name.toLowerCase().substring(0,this.search.length) + '  ' + contatto.name);
+                    console.log(contatto.visible);
+                    contatto.visible = true
+                    console.log(contatto.visible);
+                }else{
+                    console.log(this.search.toLowerCase() + '=' + contatto.name.toLowerCase().substring(0,this.search.length) + '  ' + contatto.name);
+                    console.log('non è uguale');
+                    console.log(contatto.visible);
+                    contatto.visible = false
+                    console.log(contatto.visible);
+                }
+            })
+            return true
+            /*} else{
+                return  false
+            } */
+    },
     },
     mounted() {
         this.last_acces(),

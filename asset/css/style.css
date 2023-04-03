@@ -8,8 +8,7 @@
 .sent{
     background-color: #d5f9ba;
     max-width: 50%;
-    position: absolute;
-    right: 0;
+    align-items: end;
 }
 .received{
     background-color: white;
