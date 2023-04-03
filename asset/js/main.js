@@ -186,7 +186,7 @@ const app = createApp({
         chage_activeChat(index) {
             this.activechat = index
         },
-        genereted_new_mess(index) {
+        genereted_new_mess() {
             let now = this.datenow()
             let lastenter2 = String(now)
             lastenter2 = lastenter2.substring(11,16)
