@@ -303,6 +303,9 @@ const app = createApp({
             this.datelastaccess.splice(this.activechat, 1, lastenter2)
             return lastenter2
         },
+        lastmess(user){
+            return user.messages[(user.messages.length)- 1].message
+        }
 
     },
 
