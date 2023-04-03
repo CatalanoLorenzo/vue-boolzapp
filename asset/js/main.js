@@ -304,9 +304,21 @@ const app = createApp({
             return lastenter2
         },
         lastmess(user){
-            return user.messages[(user.messages.length)- 1].message
+            if (user.messages.length != 0) {
+                return user.messages[(user.messages.length)- 1].message
+            }else{
+                return null
+            }
+            
+        },
+        deleteAllMessages(){
+            const arrayvuoto = []
+            this.contacts[this.activechat].messages = arrayvuoto
+        },
+        deleteChat(){
+            
+            this.contacts.splice(this.activechat,1)
         }
-
     },
 
     computed: {
