@@ -182,7 +182,8 @@ const app = createApp({
             last_enter: '',
             nowWriting: false,
             accounstWriting: false,
-            online: false
+            online: false,
+            frasiRandom:['ok', 'va Bene', 'no!', 'vai a farmi un frappè']
         }
     },
     methods: {
@@ -206,9 +207,13 @@ const app = createApp({
         },
         ask_new_mess() {
             this.accounstWriting = false
-            this.newobjet.message = 'ok'
+            let indicefrasi = this.frasiRandom.length - 1
+            console.log(indicefrasi)
+            let indicerandom = Math.floor(Math.random() * indicefrasi)
+            this.newobjet.message = this.frasiRandom[indicerandom]
+            console.log();
             this.newobjet.status = 'received'
-            this.contacts[this.activechat].messages.push({ ...this.newobjet });
+            this.contacts[this.activechat].messages.push({ ...this.newobjet })
             this.newobjet.message = ''
             this.newobjet.status = 'sent'
             this.accounstWriting = false
