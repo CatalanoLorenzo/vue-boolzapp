@@ -75,3 +75,10 @@
 .menu_a_tendina{
     right: 0;
 }
+.add_account{
+    z-index: 2;
+}
+.add_account img{
+    width: 100%;
+    aspect-ratio: 1;
+}

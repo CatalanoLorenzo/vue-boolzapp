@@ -27,12 +27,46 @@
                                 <i class="fa-solid fa-circle-notch mx-2"></i>
                                 <i class="fa-solid fa-message mx-2"></i>
                                 <i class="fa-solid fa-ellipsis-vertical mx-2"></i>
+                                <div class="add_account bg-primary position-fixed d-flex flex-column">
+                                    <span>Nome:</span><input v-model="newNameContact" type="text" placeholder="scrivi il nome">
+                                    <select v-model="optionvalue" placeholder="scegli ">
+                                            icon 1
+                                        </option>
+                                        <option value="./img/avatar_2.png">
+                                            icon 2
+                                        </option>
+                                        <option value="./img/avatar_3.png">
+                                            icon 3
+                                        </option>
+                                        <option value="./img/avatar_4.png">
+                                            icon 4
+                                        </option>
+                                        <option value="./img/avatar_5.png">
+                                            icon 5
+                                        </option>
+                                        <option value="./img/avatar_6.png">
+                                            icon 6
+                                        </option>
+                                        <option value="./img/avatar_7.png">
+                                            icon 7
+                                        </option>
+                                        <option value="./img/avatar_8.png">
+                                            icon 8
+                                        </option>
+                                        <option value="./img/avatar_io.png">
+                                            icon 9
+                                        </option>
+                                    </select>
+                                    <img :src="optionvalue" alt="">
+                                    <button @click="addNew_Contact">aggiungi Account</button>
+                                </div>
                             </div>
                         </header>
                         <main class="overflow-hidden">
                             <div class="notific d-flex p-3">
                                 <div class="circle d-flex justify-content-center align-items-center mx-2">
                                     <i class="fa-solid fa-bell-slash fa-2x"></i>
+                                    
                                 </div>
                                 <div class="mx-2">
                                     <h6>Ricevi notifiche di nuovi messaggi</h6>

@@ -166,6 +166,7 @@ const app = createApp({
                     ],
                 }
             ],
+            optionvalue: '',
             activechat: 0,
             messageNew: null,
             data: '',
@@ -174,8 +175,15 @@ const app = createApp({
                 message: '',
                 status: 'sent'
             },
+            newAccount:{
+                name: '',
+                avatar: '',
+                visible: true,
+                messages: []
+            },
             datelastaccess: [],
             search: '',
+            newNameContact: '',
             activeSearch: false,
             showMenus: false,
             lastAcces: '',
@@ -318,6 +326,12 @@ const app = createApp({
         deleteChat(){
             
             this.contacts.splice(this.activechat,1)
+        },
+        addNew_Contact(){
+            this.newAccount.name = this.newNameContact
+            this.newAccount.avatar = this.optionvalue
+            this.contacts.push(this.newAccount)
+            
         }
     },
 
@@ -349,17 +363,13 @@ const app = createApp({
         confronto() {
             this.contacts.forEach(contatto => {
                 if (contatto.name.toLowerCase().includes(this.search.toLowerCase())) {
-                    console.log('la parola cercata si trova dentro array');
-                    console.log(contatto.name.toLowerCase().substring(0, this.search.length) + '  ' + contatto.name);
-                    console.log(contatto.visible);
+                    
                     contatto.visible = true
-                    console.log(contatto.visible);
+                  
                 } else {
-                    console.log(this.search.toLowerCase() + '=' + contatto.name.toLowerCase().substring(0, this.search.length) + '  ' + contatto.name);
-                    console.log('non è uguale');
-                    console.log(contatto.visible);
+                    
                     contatto.visible = false
-                    console.log(contatto.visible);
+                    
                 }
             })
 
