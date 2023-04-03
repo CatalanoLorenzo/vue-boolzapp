@@ -74,8 +74,9 @@
                                 </div>
                                 <div class="info_acces">
                                     <p class="m-0 fw-bold">{{contacts[activechat].name}}</p>
-                                    
-                                    <p class="m-0">ultimo accesso : {{datelastaccess[this.activechat]}}</p>
+                                    <p class="m-o" v-show="accounstWriting">...Sta Scrivendo </p>
+                                    <p class="m-o" v-show="online">Oniline </p>
+                                    <p class="m-0" v-show="lastAccesView">ultimo accesso : {{datelastaccess[this.activechat]}}</p>
                                 </div>
                             </div>
                             <div class="nav_texing d-flex align-items-center">
@@ -88,8 +89,8 @@
                             <div class="area_texting px-5 overflow-auto  " >
                                 <div class="message py-3 d-flex " v-for="(mess,index) in contacts[activechat].messages" :class="mess.status == 'sent' ? 'justify-content-end' : 'align-items-start'">
                                     <div class="text d-flex rounded-2 "  :class="mess.status" @click="showmenu ">
-                                        <div class="" >
-                                            <div class="menu_a_tendina ">
+                                        <div class="position-relative" >
+                                            <div class="menu_a_tendina position-absolute">
                                                 <div class="dropdown">
                                                     <button class="border-0 " v-show="showMenus" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fa-solid fa-chevron-down"></i>
@@ -114,7 +115,10 @@
                                 <div class="input_area w-100">
                                     <input type="text" class="w-100 p-2 rounded-2 border-light" placeholder="Scrvi un messaggio" v-model="messageNew"  @keyup.enter="new_mess_full(index)" >
                                 </div>
-                                <div class="icon-rec px-3">
+                                <div class="icon-rec px-3" v-if="nowWriting">
+                                    <i class="fa-sharp fa-solid fa-paper-plane" @click="new_mess_full(index)" ></i>
+                                </div>
+                                <div class="icon-rec px-3" v-else>
                                     <i class="fa-solid fa-microphone"></i>
                                 </div>
                             </footer>

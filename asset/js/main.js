@@ -167,7 +167,7 @@ const app = createApp({
                 }
             ],
             activechat: 0,
-            messageNew: '',
+            messageNew: null,
             data: '',
             newobjet: {
                 date: '',
@@ -179,7 +179,10 @@ const app = createApp({
             activeSearch: false,
             showMenus: false,
             lastAcces: '',
-            last_enter: ''
+            last_enter: '',
+            nowWriting: false,
+            accounstWriting: false,
+            online: false
         }
     },
     methods: {
@@ -187,26 +190,45 @@ const app = createApp({
             this.activechat = index
         },
         genereted_new_mess() {
+
             let now = this.datenow()
             let lastenter2 = String(now)
             lastenter2 = lastenter2.substring(11, 16)
-
             this.datelastaccess.splice(this.activechat, 1, lastenter2);
             this.newobjet.date = now
             this.newobjet.message = this.messageNew
             this.contacts[this.activechat].messages.push({ ...this.newobjet });
-            this.messageNew = ''
+            this.messageNew = null
+            this.nowWriting = true
+
+
+
         },
         ask_new_mess() {
+            this.accounstWriting = false
             this.newobjet.message = 'ok'
             this.newobjet.status = 'received'
             this.contacts[this.activechat].messages.push({ ...this.newobjet });
             this.newobjet.message = ''
             this.newobjet.status = 'sent'
+            this.accounstWriting = false
+            this.online = true
         },
-        new_mess_full(index) {
-            this.genereted_new_mess(index);
-            setTimeout(() => { this.ask_new_mess() }, 1000);
+        new_mess_full() {
+            if (this.messageNew.trim() != null) {
+                this.genereted_new_mess();
+                this.accounstWriting = true
+
+
+                setTimeout(() => { this.online = false }, 5000)
+
+                setTimeout(() => {
+                    this.ask_new_mess()
+                    this.accounstWriting = false
+                }, 1000);
+
+            }
+
         },
 
 
@@ -276,9 +298,22 @@ const app = createApp({
             this.datelastaccess.splice(this.activechat, 1, lastenter2)
             return lastenter2
         },
+
     },
 
     computed: {
+        lastAccesView() {
+            if (this.online || this.accounstWriting) {
+                return false
+            } else {
+                return true
+            }
+        },
+        writing() {
+            if (this.messageNew != null) {
+                this.nowWriting = true
+            }
+        },
         search_name() {
             if (this.search != '' && this.contacts[this.activechat].messages.length > 1) {
                 this.confronto()
