@@ -174,6 +174,7 @@ const app = createApp({
                 message: '',
                 status: 'sent'
             },
+            datelastaccess: [],
             search: '',
             activeSearch: false,
             showMenus : false,
@@ -185,8 +186,12 @@ const app = createApp({
         chage_activeChat(index) {
             this.activechat = index
         },
-        genereted_new_mess() {
+        genereted_new_mess(index) {
             let now = this.datenow()
+            let lastenter2 = String(now)
+            lastenter2 = lastenter2.substring(11,16)
+           
+            this.datelastaccess.splice(this.activechat,1,lastenter2);
             this.newobjet.date = now
             this.newobjet.message = this.messageNew
             this.contacts[this.activechat].messages.push({ ...this.newobjet });
@@ -199,8 +204,8 @@ const app = createApp({
             this.newobjet.message = ''
             this.newobjet.status = 'sent'
         },
-        new_mess_full() {
-            this.genereted_new_mess();
+        new_mess_full(index) {
+            this.genereted_new_mess(index);
             setTimeout(() => { this.ask_new_mess() }, 1000);
         },
         
@@ -239,34 +244,60 @@ const app = createApp({
             console.log(this.contacts[this.activechat].messages);
             console.log(this.contacts[this.activechat].messages[i]);
         },
-        lastenter(contatto){
-            let position_last_mess = (contatto.messages.length) - 1
-            console.log(position_last_mess);
-            let lastenter2 = String(contatto.messages[position_last_mess].date)
-            console.log(lastenter2);
-            lastenter2 = lastenter2.substring(11,16)
-            this.lastAcces = lastenter2
-            return this.lastAcces
+        lastenter(){
+            this.contacts.forEach((contatto,index) => {
+                let position_last_mess = (contatto.messages.length) - 1
+                let lastenter2 = String(contatto.messages[position_last_mess].date)
+                lastenter2 = lastenter2.substring(11,16)
+                this.lastAcces = lastenter2
+                this.datelastaccess.splice(index,1,lastenter2)
+                return this.lastAcces
+
+            })
         },
         
+       
+        datenow(){
+            
+            let giorno = new Date().getDate()
+            if(giorno <= 9 ){
+                giorno = '0' + giorno
+            }
+            let mese = (new Date().getMonth()) + 1
+            
+            let anno = new Date().getFullYear()
+            let ora = new Date().getHours()
+            let minuti = new Date().getMinutes()
+            if(minuti <= 9 ){
+                minuti = '0' + minuti
+            }
+            return ` ${giorno}/0${mese}/${anno} ${ora}:${minuti}:00 `
+           
+        },
+        showLastAccess(){
+            if(this.contacts[this.activechat].messages.length < 1){
+                return this.datelastaccess[this.activechat]
+            }else{
+                return this.last_acces
+            }
+        },
+        showLastEnter(contatto,index){
+            if(contatto.messages.length < 1){
+                return this.datelastaccess[index]
+            }else{
+                return this.lastenter(contatto)
+            }
+        },
         last_acces(){
             let position_last_mess = (this.contacts[this.activechat].messages.length) - 1
             let lastenter2 = String(this.contacts[this.activechat].messages[position_last_mess].date)
             lastenter2 = lastenter2.substring(11,16)
-            this.last_enter = lastenter2
-            return this.last_enter
-        },
-        datenow(){
-            
-            let giorno = new Date().getDate()
-            let mese = new Date().getMonth()
-            let anno = new Date().getFullYear()
-            let ora = new Date().getHours()
-            let minuti = new Date().getMinutes()
-            return ` ${giorno}/0${mese}/${anno} ${ora}:${minuti}:00 `
            
+            this.datelastaccess.splice(this.activechat,1,lastenter2)
+            return lastenter2
         },
     },
+    
     computed:{
         search_name() {
             if(this.search != '' && this.contacts[this.activechat].messages.length > 1){
@@ -280,10 +311,10 @@ const app = createApp({
             }
             
         },
-      
     },
     mounted() {
-        
+        this.last_acces(),
+        this.lastenter()
     }
 })
 
