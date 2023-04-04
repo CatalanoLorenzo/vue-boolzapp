@@ -96,7 +96,7 @@
                             <div class="container_search bg-white p-2">
                                 <div class="input-group ">
                                     <span class="input-group-text bg-white border-end-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                    <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" v-model="search"  >
+                                    <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" v-model="search" @keyup="search_name" >
                                   </div>
                             </div>
                             <!-- list of contacts-->

@@ -503,7 +503,32 @@ const app = createApp({
             setTimeout(() => {
                 this.logo_show = false
             },1850)
-        }
+        },
+        /**Search name
+         * 
+         */
+        search_name() {
+
+            //condizione: se il valore della key search è diverso da '' e in numero di messaggi della chat attiva è maggiore di 1
+            if (this.search != '' && this.contacts[this.active_chat].messages.length > 1) {
+                
+                //usa la funzione confrontatio
+                this.confrontation()
+
+            //condizione:sennò
+            } else {
+
+                //cicla dell'array contacts prendendo l'elemento
+                this.contacts.forEach(contatto => {
+
+                    //resetta il valore della key visible dell'elemento
+                    contatto.visible = true
+
+                })
+
+            }
+
+        },
     },
     computed: {
 
@@ -549,31 +574,7 @@ const app = createApp({
 
             }
         },
-        /**Search name
-         * 
-         */
-        search_name() {
-
-            //condizione: se il valore della key search è diverso da '' e in numero di messaggi della chat attiva è maggiore di 1
-            if (this.search != '' && this.contacts[this.active_chat].messages.length > 1) {
-                
-                //usa la funzione confrontatio
-                this.confrontation()
-
-            //condizione:sennò
-            } else {
-
-                //cicla dell'array contacts prendendo l'elemento
-                this.contacts.forEach(contatto => {
-
-                    //resetta il valore della key visible dell'elemento
-                    contatto.visible = true
-
-                })
-
-            }
-
-        },
+        
        
     },
     mounted() {
