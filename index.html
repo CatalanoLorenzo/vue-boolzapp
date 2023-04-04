@@ -16,17 +16,23 @@
                 <div class="row">
                     <!-- left -->
                     <div class="users col-4 p-0">
+                        <!-- header -->
                         <header class="d-flex justify-content-between align-items-center p-3">
+                            <!-- user profile -->
                             <div class="userprofile d-flex align-items-center">
+                                <!-- user icon -->
                                 <div class="circle">
                                     <img src="./img/avatar_io.png" alt="">
                                 </div>
+                                <!-- user name -->
                                 <h4 class="">Sofia</h4>
                             </div>
+                            <!-- icon for nav -->
                             <div class="navicon p-2">
                                 <i class="fa-solid fa-circle-notch mx-2"></i>
                                 <i class="fa-solid fa-message mx-2"></i>
                                 <i class="fa-solid fa-ellipsis-vertical mx-2" @click="show_pannel_new_account"></i>
+                                <!-- menu for generated account -->
                                 <div class="add_account bg-primary position-fixed  flex-column" v-show="new_account_pannel_show">
                                     <span>Nome:</span><input v-model="new_name_contact" type="text" placeholder="scrivi il nome">
                                     <select v-model="option_value" placeholder="scegli ">
@@ -62,7 +68,9 @@
                                 </div>
                             </div>
                         </header>
+                        <!-- main -->
                         <main class="overflow-hidden">
+                            <!-- banner for ability notific -->
                             <div class="notific d-flex p-3">
                                 <div class="circle d-flex justify-content-center align-items-center mx-2">
                                     <i class="fa-solid fa-bell-slash fa-2x"></i>
@@ -73,20 +81,25 @@
                                     <a href="#">Attiva notifiche desktop</a>
                                 </div>
                             </div>
+                            <!-- search bar -->
                             <div class="container_search bg-white p-2">
                                 <div class="input-group ">
                                     <span class="input-group-text bg-white border-end-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
                                     <input type="text" class="form-control border-start-0" placeholder="Cerca o inizia una nuova chat" aria-label="Search" v-model="search"  >
                                   </div>
                             </div>
+                            <!-- list of contacts-->
                             <div class="show_users overflow-auto bg-white" >
+                                <!-- genereted contacts -->
                                 <div class="show_user bg-white " v-for="(user,index) in contacts" @click="chage_active_chat(index)">
                                     <div class="d-flex align-items-center bg-white p-2" v-if="user.visible">
+                                        <!-- avatar contact -->
                                         <div class="avatar px-3">
                                             <div class="circle">
                                                 <img :src="user.avatar" :alt="user.name">
                                             </div>
                                         </div>
+                                        <!-- info contact -->
                                         <div class="info d-flex flex-column">
                                             <p class="m-0 p-0 fw-bold">{{user.name}}</p>
                                             <p class="m-0 p-0 co">{{last_mess(user)}}</p>
@@ -102,10 +115,13 @@
                     <!-- right -->
                     <div class="mess col-8 p-0">
                         <header class="p-3 d-flex justify-content-between">
+                            <!-- info contact select -->
                             <div class="user_texting d-flex align-items-center ">
+                                <!-- icon contact select-->
                                 <div class="circle ">
                                     <img :src="contacts[active_chat].avatar" alt="">
                                 </div>
+                                <!-- info contact select -->
                                 <div class="info_acces">
                                     <p class="m-0 fw-bold">{{contacts[active_chat].name}}</p>
                                     <p class="m-o" v-show="account_writing">...Sta Scrivendo </p>
@@ -113,10 +129,12 @@
                                     <p class="m-0" v-show="last_acces_view">ultimo accesso : {{date_last_access[this.active_chat]}}</p>
                                 </div>
                             </div>
+                            <!-- option nav -->
                             <div class="nav_texing d-flex align-items-center">
+                                <!-- icon menu -->
                                 <i class="fa-solid fa-magnifying-glass "></i>
                                 <i class="fa-solid fa-paperclip "></i>
-                                
+                                <!-- menu for delete mess and chat -->
                                 <div class="menu_a_tendina">
                                     <div class="dropdown">
                                         <button class="border-0 "  type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -131,12 +149,16 @@
                             </div>
                         </header>
                         <main class="position-relative">
+                            <!-- text area -->
                             <div class="area_texting px-5 overflow-auto  " >
-                                <!-- ------------------------------------------------- -->
+                                <!-- link for last mess -->
                                 <a :href="'#'+'messaggio' + message_length">ultimo messaggio letto</a>
+                                <!-- genereted messages -->
                                 <div class="message py-3 d-flex " v-for="(mess,index) in contacts[active_chat].messages" :class="mess.status == 'sent' ? 'justify-content-end' : 'align-items-start'">
                                     <div class="text d-flex rounded-2 " :id="'messaggio' + index " :class="mess.status" @click="showmenu ">
+                                        <!-- message -->
                                         <div class="position-relative" >
+                                            <!-- menu for delete message -->
                                             <div class="menu_a_tendina position-absolute">
                                                 <div class="dropdown">
                                                     <button class="border-0 " v-show="show_menus" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -148,6 +170,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            <!-- info message -->
                                             <p class="px-2">{{mess.message}}</p>
                                             <p class="date px-2">{{mess.date}}</p>
 
@@ -155,16 +178,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- foter main -->
                             <footer class="w-100 position-absolute d-flex p-2">
-                              
-
-
+                                <!-- icon menu -->
                                 <div class="icon_menu px-3">
                                     <i class="fa-regular fa-face-smile"></i>
                                 </div>
+                                <!-- input new message -->
                                 <div class="input_area w-100">
                                     <input type="text" class="w-100 p-2 rounded-2 border-light" placeholder="Scrvi un messaggio" v-model="message_new"  @keyup.enter="new_mess_full(index)" >
                                 </div>
+                                <!-- icon for send or recoding -->
                                 <div class="icon-rec px-3" v-if="now_writing">
                                     <i class="fa-sharp fa-solid fa-paper-plane" @click="new_mess_full(index)" ></i>
                                 </div>
