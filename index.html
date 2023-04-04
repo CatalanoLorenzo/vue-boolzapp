@@ -26,10 +26,10 @@
                             <div class="navicon p-2">
                                 <i class="fa-solid fa-circle-notch mx-2"></i>
                                 <i class="fa-solid fa-message mx-2"></i>
-                                <i class="fa-solid fa-ellipsis-vertical mx-2" @click="showpannelnewaccount()"></i>
-                                <div class="add_account bg-primary position-fixed  flex-column" v-show="newaccountpannelshow">
-                                    <span>Nome:</span><input v-model="newNameContact" type="text" placeholder="scrivi il nome">
-                                    <select v-model="optionvalue" placeholder="scegli ">
+                                <i class="fa-solid fa-ellipsis-vertical mx-2" @click="show_pannel_new_account"></i>
+                                <div class="add_account bg-primary position-fixed  flex-column" v-show="new_account_pannel_show">
+                                    <span>Nome:</span><input v-model="new_name_contact" type="text" placeholder="scrivi il nome">
+                                    <select v-model="option_value" placeholder="scegli ">
                                             icon 1
                                         </option>
                                         <option value="./img/avatar_2.png">
@@ -57,8 +57,8 @@
                                             icon 9
                                         </option>
                                     </select>
-                                    <img  :src="optionvalue" alt="">
-                                    <button @click="addNew_Contact">aggiungi Account</button>
+                                    <img  :src="option_value" alt="">
+                                    <button @click="add_new_contact">aggiungi Account</button>
                                 </div>
                             </div>
                         </header>
@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="info d-flex flex-column">
                                             <p class="m-0 p-0 fw-bold">{{user.name}}</p>
-                                            <p class="m-0 p-0 co">{{lastmess(user)}}</p>
+                                            <p class="m-0 p-0 co">{{last_mess(user)}}</p>
                                             <p class="m-0 p-0">{{date_last_access[index]}}</p>
                                         </div>
                                     </div>
@@ -108,9 +108,9 @@
                                 </div>
                                 <div class="info_acces">
                                     <p class="m-0 fw-bold">{{contacts[active_chat].name}}</p>
-                                    <p class="m-o" v-show="accounstWriting">...Sta Scrivendo </p>
+                                    <p class="m-o" v-show="account_writing">...Sta Scrivendo </p>
                                     <p class="m-o" v-show="online">Online </p>
-                                    <p class="m-0" v-show="lastAccesView">ultimo accesso : {{date_last_access[this.active_chat]}}</p>
+                                    <p class="m-0" v-show="last_acces_view">ultimo accesso : {{date_last_access[this.active_chat]}}</p>
                                 </div>
                             </div>
                             <div class="nav_texing d-flex align-items-center">
@@ -123,8 +123,8 @@
                                             <i class="fa-solid fa-ellipsis-vertical "></i>
                                         </button>
                                         <ul class="dropdown-menu">
-                                          <li><a class="dropdown-item" href="#" @click="deleteAllMessages" >Elimina messaggi</a></li>
-                                          <li><a class="dropdown-item" href="#" @click="deleteChat">Elimina chat</a></li>
+                                          <li><a class="dropdown-item" href="#" @click="delete_all_messages" >Elimina messaggi</a></li>
+                                          <li><a class="dropdown-item" href="#" @click="delete_chat">Elimina chat</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -133,13 +133,13 @@
                         <main class="position-relative">
                             <div class="area_texting px-5 overflow-auto  " >
                                 <!-- ------------------------------------------------- -->
-                                <a :href="'#'+'messaggio' + lunghezzamessaggio">ultimo messaggio letto</a>
+                                <a :href="'#'+'messaggio' + message_length">ultimo messaggio letto</a>
                                 <div class="message py-3 d-flex " v-for="(mess,index) in contacts[active_chat].messages" :class="mess.status == 'sent' ? 'justify-content-end' : 'align-items-start'">
                                     <div class="text d-flex rounded-2 " :id="'messaggio' + index " :class="mess.status" @click="showmenu ">
                                         <div class="position-relative" >
                                             <div class="menu_a_tendina position-absolute">
                                                 <div class="dropdown">
-                                                    <button class="border-0 " v-show="showMenus" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="border-0 " v-show="show_menus" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fa-solid fa-chevron-down"></i>
                                                     </button>
                                                     <ul class="dropdown-menu">
@@ -156,16 +156,16 @@
                                 </div>
                             </div>
                             <footer class="w-100 position-absolute d-flex p-2">
-                                <textarea v-model="input"></textarea>
+                              
 
 
                                 <div class="icon_menu px-3">
                                     <i class="fa-regular fa-face-smile"></i>
                                 </div>
                                 <div class="input_area w-100">
-                                    <input type="text" class="w-100 p-2 rounded-2 border-light" placeholder="Scrvi un messaggio" v-model="messageNew"  @keyup.enter="new_mess_full(index)" >
+                                    <input type="text" class="w-100 p-2 rounded-2 border-light" placeholder="Scrvi un messaggio" v-model="message_new"  @keyup.enter="new_mess_full(index)" >
                                 </div>
-                                <div class="icon-rec px-3" v-if="nowWriting">
+                                <div class="icon-rec px-3" v-if="now_writing">
                                     <i class="fa-sharp fa-solid fa-paper-plane" @click="new_mess_full(index)" ></i>
                                 </div>
                                 <div class="icon-rec px-3" v-else>

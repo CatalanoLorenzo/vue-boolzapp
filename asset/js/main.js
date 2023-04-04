@@ -170,28 +170,24 @@ const app = createApp({
                     ],
                 }
             ],
-            ultimomessaggio: '',
-            optionvalue: '',
+            option_value: '',
             active_chat: 0,
-            messageNew: null,
+            message_new: null,
             data: '',
             newobjet: {
                 date: '',
                 message: '',
                 status: 'sent'
             },
-            newaccountpannelshow: false,
+            new_account_pannel_show: false,
             date_last_access: [],
-            input:'',
             search: '',
-            search2: '',
-            newNameContact: '',
-            activeSearch: false,
-            showMenus: false,
+            new_name_contact: '',
+            show_menus: false,
             last_acces: '',
             last_enter: '',
-            nowWriting: false,
-            accounstWriting: false,
+            now_writing: false,
+            account_writing: false,
             online: false,
             random_answers: ['ok', 'va Bene', 'no!', 'vai a farmi un frappè']
         }
@@ -201,24 +197,24 @@ const app = createApp({
          * 
          * @param {Number} index 
          */
-            chage_active_chat(index) {
+        chage_active_chat(index) {
 
             //cambia il valore di active_chat con l'index
             this.active_chat = index
-            },
+        },
         /**Showmenu
          * 
          */
-            showmenu() {
+        showmenu() {
 
-            //cambia lo stato di showMenus con il suo opposto
-            this.showMenus = !this.showMenus
+            //cambia lo stato di show_menus con il suo opposto
+            this.show_menus = !this.show_menus
 
-            },
+        },
         /**Genereted new mess
          * 
          */
-            genereted_new_mess() {
+        genereted_new_mess() {
 
             //crea una variabile e ha come contenuto la data attuale
             let now = this.date_now();
@@ -230,23 +226,23 @@ const app = createApp({
             this.date_last_access.splice(this.active_chat, 1, lastenter2);
             //sostituisce il valore della variabile now al valore della key data dell'ogetto modello
             this.newobjet.date = now;
-            //sostituisce il valore della key messageNew  al valore della key message dell'ogetto modello
-            this.newobjet.message = this.messageNew;
+            //sostituisce il valore della key message_new  al valore della key message dell'ogetto modello
+            this.newobjet.message = this.message_new;
             //inserisce all'interno dell'array contacts l'oggetto modello appena modificato
             this.contacts[this.active_chat].messages.push({ ...this.newobjet });
-            //reseta i valori d'input di messageNew
-            this.messageNew = null;
-            //cambia il valore di nowWriting in true
-            this.nowWriting = true;
+            //reseta i valori d'input di message_new
+            this.message_new = null;
+            //cambia il valore di now_writing in true
+            this.now_writing = true;
 
-            },
+        },
         /**Ask new mess
          * 
          */
-            ask_new_mess() {
+        ask_new_mess() {
 
-            //cambia il valore di accounstWriting
-            this.accounstWriting = false;
+            //cambia il valore di account_writing
+            this.account_writing = false;
             //crea una variabile con contenuto la quantità di stringe dell'array random_answers meno uno
             let message_index = this.random_answers.length - 1;
             //crea una variabile con contenuto un numero random compreso tra  0 e  message_index
@@ -261,28 +257,28 @@ const app = createApp({
             this.newobjet.message = '';
             //resetta il valore della key status dell'ogetto modello
             this.newobjet.status = 'sent';
-            //cambia il valore di accounstWriting
-            this.accounstWriting = false;
+            //cambia il valore di account_writing
+            this.account_writing = false;
             //cambia il valore di online
             this.online = true;
 
-            },
+        },
         /**New mess full
          * 
          */
-            new_mess_full() {
+        new_mess_full() {
 
             //condizione:se la parola inserita non è null
-            if (this.messageNew.trim() != null) {
+            if (this.message_new.trim() != null) {
                 //usa la funzione genereted_new_mess per la creazione del nuovo messaggio 
                 this.genereted_new_mess();
-                //cambia il valore di accounstWriting
-                this.accounstWriting = true
+                //cambia il valore di account_writing
+                this.account_writing = true
                 //inizia un timeout di 5s
                 setTimeout(() => {
 
                     //al termi del timeout resetta il valore di online
-                    this.online = false 
+                    this.online = false
 
                 }, 5000)
                 //inzia un timeout di 1s
@@ -290,29 +286,29 @@ const app = createApp({
 
                     //al termi del timeout usa la funzione ask_new_mess per la creazione del  messaggio di risposta
                     this.ask_new_mess()
-                    //resetta il valore di accounstWriting
-                    this.accounstWriting = false
+                    //resetta il valore di account_writing
+                    this.account_writing = false
 
                 }, 1000);
 
             }
 
-            },
+        },
         /**Message deletion
          * 
          * @param {Number} i 
          */
-            message_deletion(i) {
+        message_deletion(i) {
 
-                //cancellazione messaggio in posizione i
-                this.contacts[this.active_chat].messages.splice(i, 1)
+            //cancellazione messaggio in posizione i
+            this.contacts[this.active_chat].messages.splice(i, 1)
 
-            },
+        },
         /**Last Enter
          * 
          * @returns 
-         */    
-            last_enter_Methods() {
+         */
+        last_enter_Methods() {
 
             //cicla nell Array prendendo con elemento e indice
             this.contacts.forEach((contatto, index) => {
@@ -326,18 +322,18 @@ const app = createApp({
                 //sostituisce il valore di last_acces con data_last_enter
                 this.last_acces = data_last_enter
                 //inserisce il valore di data_last_enter dentro date_last_access in posizione index
-                this.date_last_access.splice(index, 1, data_last_enter )
+                this.date_last_access.splice(index, 1, data_last_enter)
                 //ritorna il valore di last_acces
                 return this.last_acces
 
             })
 
-            },
+        },
         /**Date now
          * 
          * @returns 
          */
-            date_now() {
+        date_now() {
 
             //crea una variabile e inserisce il valore di getDate()
             let giorno = new Date().getDate()
@@ -357,7 +353,7 @@ const app = createApp({
                 //aggiunge 0 prima del suo valore
                 mese = '0' + mese
 
-           }
+            }
             //crea una variabile e inserisce il valore di .getFullYear()
             let anno = new Date().getFullYear()
             //crea una variabile e inserisce il valore di getHours()
@@ -367,8 +363,8 @@ const app = createApp({
             //condizione :se il valore della variabile è uguale o inferiore a nove
             if (minuti <= 9) {
 
-                 //aggiunge 0 prima del suo valore
-                 minuti = '0' + minuti
+                //aggiunge 0 prima del suo valore
+                minuti = '0' + minuti
 
             }
 
@@ -377,106 +373,202 @@ const app = createApp({
 
 
 
-            },
-        showLastEnter(contatto, index) {
-            if (contatto.messages.length < 1) {
-                return this.date_last_access[index]
-            } else {
-                return this.lastenter(contatto)
-            }
         },
+        /**Last acces Methods
+         * 
+         * @returns 
+         */
         last_acces_Methods() {
-            let position_last_mess = (this.contacts[this.active_chat].messages.length) - 1
-            let lastenter2 = String(this.contacts[this.active_chat].messages[position_last_mess].date)
-            lastenter2 = lastenter2.substring(11, 16)
 
-            this.date_last_access.splice(this.active_chat, 1, lastenter2)
-            return lastenter2
+            //crea una variabile e le assegna i numero di messaggi contacts[this.active_chat]
+            let position_last_mess = (this.contacts[this.active_chat].messages.length) - 1
+            // crea una variabile e le asseggna la data dell'ultimo messaggio di contacts[this.active_chat]
+            let last_enter_let = String(this.contacts[this.active_chat].messages[position_last_mess].date)
+            //sostituisce il valore della variabile con gli elementi in posizione 11 fino alla 16
+            last_enter_let = last_enter_let.substring(11, 16)
+            //inserisce in date_last_access la varibile creata per la posizione della chat attiva
+            this.date_last_access.splice(this.active_chat, 1, last_enter_let)
+            //ritorna il valore sella variabile last_enter
+            return last_enter_let
         },
-        lastmess(user) {
+        /**Last mess
+         * 
+         * @param {String} user 
+         * @returns 
+         */
+        last_mess(user) {
+
+            //condizione: se il numero di messaggi è diverso da zero 
             if (user.messages.length != 0) {
+
+                //ritorna il il valore dell messagio in ultima posizione
                 return user.messages[(user.messages.length) - 1].message
+
+                //condizione:sennò   
             } else {
+
+                //ritorna un valore null
                 return null
             }
 
         },
-        deleteAllMessages() {
-            const arrayvuoto = []
-            this.contacts[this.active_chat].messages = arrayvuoto
-        },
-        deleteChat() {
+        /**Delete all messages
+         * 
+         */
+        delete_all_messages() {
 
+            //crea una variabile con un array vuoto
+            const arrayvuoto = []
+            //cositutisce il valore di messages della chat attiva con la variabile appena creata
+            this.contacts[this.active_chat].messages = arrayvuoto
+
+        },
+        /**Delete chat
+         * 
+         */
+        delete_chat() {
+
+            //elimina l'intero oggetto(account) dall'array contacts
             this.contacts.splice(this.active_chat, 1)
         },
-        addNew_Contact() {
-            let newAccount = {
+        /**Add new contact
+         * 
+         */
+        add_new_contact() {
+
+            //crea una variabile con valore l'oggetto di un account di default
+            let new_account = {
+
                 name: '',
                 avatar: '',
                 visible: true,
                 messages: []
+
             }
-            newAccount.name = this.newNameContact
-            newAccount.avatar = this.optionvalue
-            this.contacts.unshift(newAccount)
-            this.newNameContact = ''
-            this.optionvalue = ''
+            //sostituisce il valore della key name dell'oggetto default con new_name_contact
+            new_account.name = this.new_name_contact
+            //sostituisce il valore della key avatar dell'oggetto default con option_value
+            new_account.avatar = this.option_value
+            //inserisce all'inizio dell'array contacts la variabile new_account
+            this.contacts.unshift(new_account)
+            //resetta i valori di new_name_contact
+            this.new_name_contact = ''
+            //resetta i valori di option_value
+            this.option_value = ''
 
 
         },
-        showpannelnewaccount() {
-            this.newaccountpannelshow = !this.newaccountpannelshow
-        },
-    },
+        /**Show pannel new account
+         * 
+         */
+        show_pannel_new_account() {
 
-    computed: {
-        
-        
-        lunghezzamessaggio() {
-            return Number((this.contacts[this.active_chat].messages.length) - 1)
-        },
-        lastAccesView() {
-            if (this.online || this.accounstWriting) {
-                return false
-            } else {
-                return true
-            }
-        },
-        writing() {
-            if (this.messageNew != null) {
-                this.nowWriting = true
-            }
-        },
-        search_name() {
-            if (this.search != '' && this.contacts[this.active_chat].messages.length > 1) {
-                this.confronto()
-
-            } else {
-                this.contacts.forEach(contatto => {
-                    contatto.visible = true
-
-                })
-            }
+            //inverte il valore di new_account_pannel_show
+            this.new_account_pannel_show = !this.new_account_pannel_show
 
         },
-        confronto() {
+        /**Confrontation
+         * 
+         */
+        confrontation() {
+
+            //cicla all'interno dell'array e prende l'elemento
             this.contacts.forEach(contatto => {
+
+                //condizione:se il valore della key name dell'elemento include il valore della key search
                 if (contatto.name.toLowerCase().includes(this.search.toLowerCase())) {
 
+                    //allora cambia il valore della key visible dell'elemnto 
                     contatto.visible = true
-
+                
+                //condizione:sennò
                 } else {
 
+                    //cambia il valore della key visible dell'elemnto 
                     contatto.visible = false
 
                 }
+
             })
 
         },
+    },
+    computed: {
 
+        /**Message length
+         * 
+         * @returns 
+         */
+        message_length() {
+
+            //ritorna la lunghezza del messagio 
+            return Number((this.contacts[this.active_chat].messages.length) - 1)
+        },
+        /**Last acces view
+         * 
+         * @returns 
+         */
+        last_acces_view() {
+
+            //condizione: se il valore di online o di account_writing e vero
+            if (this.online || this.account_writing) {
+
+                //ritorna il valore false
+                return false
+
+            //   condizione:sennò 
+            } else {
+
+                //ritorna il valore true
+                return true
+
+            }
+        },
+        /**Writing
+         * 
+         */
+        writing() {
+
+            //condizione: se il valore di message_new è diverso da null
+            if (this.message_new != null) {
+
+                //inverte il valore di now_writing
+                this.now_writing = true
+
+            }
+        },
+        /**Search name
+         * 
+         */
+        search_name() {
+
+            //condizione: se il valore della key search è diverso da '' e in numero di messaggi della chat attiva è maggiore di 1
+            if (this.search != '' && this.contacts[this.active_chat].messages.length > 1) {
+                
+                //usa la funzione confrontatio
+                this.confrontation()
+
+            //condizione:sennò
+            } else {
+
+                //cicla dell'array contacts prendendo l'elemento
+                this.contacts.forEach(contatto => {
+
+                    //resetta il valore della key visible dell'elemento
+                    contatto.visible = true
+
+                })
+
+            }
+
+        },
+       
     },
     mounted() {
+
+        //utilizza la funzione last_acces_Methods
         this.last_acces_Methods()
+        //utilizza la funzione last_enter_Methods
         this.last_enter_Methods()
     }
 })
