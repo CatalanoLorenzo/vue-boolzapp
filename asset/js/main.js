@@ -496,13 +496,28 @@ const app = createApp({
             })
 
         },
+        /**Chage show banner
+         * 
+         */
         chage_show_banner(){
+
+            //inverte il valore di show_banner
             this.show_banner = !this.show_banner
+
         },
+        /**Show splash page
+         * 
+         */
         show_splash_page (){
+
+            //inizia un timeout di 1,8s
             setTimeout(() => {
+
+                //disabilita logo_show
                 this.logo_show = false
+
             },1850)
+
         },
         /**Search name
          * 
@@ -529,6 +544,7 @@ const app = createApp({
             }
 
         },
+        
     },
     computed: {
 
@@ -540,6 +556,7 @@ const app = createApp({
 
             //ritorna la lunghezza del messagio 
             return Number((this.contacts[this.active_chat].messages.length) - 1)
+
         },
         /**Last acces view
          * 
@@ -574,8 +591,7 @@ const app = createApp({
 
             }
         },
-        
-       
+
     },
     mounted() {
         this.show_splash_page ()
