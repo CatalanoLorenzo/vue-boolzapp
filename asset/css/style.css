@@ -22,9 +22,18 @@
 .background{
     height: 100vh;
     background: linear-gradient(to bottom, #009688 10%, #dcdbd2 10%);
-    z-index: -1;
+    z-index: -3;
 }
-
+.logo_promo{
+    width: 100vw;
+    height: 100vh;
+}
+.cont{
+    filter: brightness(20%);
+}
+.container{
+    z-index: 1;
+}
 /* Users */
 .users header,.mess header{
     background-color: #eaeaea;
@@ -57,7 +66,8 @@
     background-image: url(../img/mine.jpg);
 }
 .show_users{
-    height: 100%;
+    max-width: 100%;
+    min-height: 100%;
 }
 .nav_texing i{
  font-size: 1.25rem;
@@ -82,4 +92,14 @@
     width: 100%;
     aspect-ratio: 1;
     display: flex;
+}
+.banner_of_welcome{
+    position: fixed;
+    top: 50vh;
+    left: 30vw;
+    z-index: 30;
+}
+.brightness{
+    filter: brightness(1);
+
 }

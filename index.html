@@ -10,10 +10,21 @@
     <link rel="stylesheet" href="./asset/css/style.css">
 </head>
 <body>
-    <div class="background">
+    <div class="background" >
         <div id="app">
-            <div class="container pt-3">
-                <div class="row">
+            <img class="logo_promo" src="./img/Boolzapp-promo.png" alt="" v-if="logo_show">
+            <div class="container pt-3 " v-else>
+
+                <div class="banner_of_welcome brightness bg-white" v-show="show_banner" >
+                    <i class="fa-solid fa-reply-all"></i>
+                    <p>seleziona un contatto dalla lista </p>
+                    <button @click="chage_show_banner">chiudi</button>
+                </div>
+
+                <div class="row" :class="!show_banner ? 'brightness' : 'cont'">
+
+                    
+
                     <!-- left -->
                     <div class="users col-4 p-0">
                         <!-- header -->
@@ -91,7 +102,7 @@
                             <!-- list of contacts-->
                             <div class="show_users overflow-auto bg-white" >
                                 <!-- genereted contacts -->
-                                <div class="show_user bg-white " v-for="(user,index) in contacts" @click="chage_active_chat(index)">
+                                <div class="show_user bg-white " v-for="(user,index) in contacts" @click="chage_active_chat(index)" >
                                     <div class="d-flex align-items-center bg-white p-2" v-if="user.visible">
                                         <!-- avatar contact -->
                                         <div class="avatar px-3">

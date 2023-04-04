@@ -170,6 +170,8 @@ const app = createApp({
                     ],
                 }
             ],
+            logo_show : true,
+            show_banner: true,
             option_value: '',
             active_chat: 0,
             message_new: null,
@@ -193,6 +195,7 @@ const app = createApp({
         }
     },
     methods: {
+
         /** Chage_active_chat
          * 
          * @param {Number} index 
@@ -201,6 +204,7 @@ const app = createApp({
 
             //cambia il valore di active_chat con l'index
             this.active_chat = index
+
         },
         /**Showmenu
          * 
@@ -492,6 +496,14 @@ const app = createApp({
             })
 
         },
+        chage_show_banner(){
+            this.show_banner = !this.show_banner
+        },
+        show_splash_page (){
+            setTimeout(() => {
+                this.logo_show = false
+            },1850)
+        }
     },
     computed: {
 
@@ -565,7 +577,7 @@ const app = createApp({
        
     },
     mounted() {
-
+        this.show_splash_page ()
         //utilizza la funzione last_acces_Methods
         this.last_acces_Methods()
         //utilizza la funzione last_enter_Methods
