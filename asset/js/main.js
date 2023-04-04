@@ -1,6 +1,10 @@
-const { createApp } = Vue
 
+
+const { createApp } = Vue
 const app = createApp({
+
+
+
     data() {
         return {
             contacts: [
@@ -166,8 +170,9 @@ const app = createApp({
                     ],
                 }
             ],
+            ultimomessaggio: '',
             optionvalue: '',
-            activechat: 0,
+            active_chat: 0,
             messageNew: null,
             data: '',
             newobjet: {
@@ -175,167 +180,261 @@ const app = createApp({
                 message: '',
                 status: 'sent'
             },
-            newAccount:{
-                name: '',
-                avatar: '',
-                visible: true,
-                messages: []
-            },
-            datelastaccess: [],
+            newaccountpannelshow: false,
+            date_last_access: [],
+            input:'',
             search: '',
+            search2: '',
             newNameContact: '',
             activeSearch: false,
             showMenus: false,
-            lastAcces: '',
+            last_acces: '',
             last_enter: '',
             nowWriting: false,
             accounstWriting: false,
             online: false,
-            frasiRandom:['ok', 'va Bene', 'no!', 'vai a farmi un frappè']
+            random_answers: ['ok', 'va Bene', 'no!', 'vai a farmi un frappè']
         }
     },
     methods: {
-        chage_activeChat(index) {
-            this.activechat = index
-        },
-        genereted_new_mess() {
+        /** Chage_active_chat
+         * 
+         * @param {Number} index 
+         */
+            chage_active_chat(index) {
 
-            let now = this.datenow()
-            let lastenter2 = String(now)
-            lastenter2 = lastenter2.substring(11, 16)
-            this.datelastaccess.splice(this.activechat, 1, lastenter2);
-            this.newobjet.date = now
-            this.newobjet.message = this.messageNew
-            this.contacts[this.activechat].messages.push({ ...this.newobjet });
-            this.messageNew = null
-            this.nowWriting = true
+            //cambia il valore di active_chat con l'index
+            this.active_chat = index
+            },
+        /**Showmenu
+         * 
+         */
+            showmenu() {
 
+            //cambia lo stato di showMenus con il suo opposto
+            this.showMenus = !this.showMenus
 
+            },
+        /**Genereted new mess
+         * 
+         */
+            genereted_new_mess() {
 
-        },
-        ask_new_mess() {
-            this.accounstWriting = false
-            let indicefrasi = this.frasiRandom.length - 1
-            console.log(indicefrasi)
-            let indicerandom = Math.floor(Math.random() * indicefrasi)
-            this.newobjet.message = this.frasiRandom[indicerandom]
-            console.log();
-            this.newobjet.status = 'received'
-            this.contacts[this.activechat].messages.push({ ...this.newobjet })
-            this.newobjet.message = ''
-            this.newobjet.status = 'sent'
-            this.accounstWriting = false
-            this.online = true
-        },
-        new_mess_full() {
+            //crea una variabile e ha come contenuto la data attuale
+            let now = this.date_now();
+            //crea una variabile il cui contenuto è la variabile di prima a stringa
+            let lastenter2 = String(now);
+            //prende dalla stringa solo gli elementi in posizione 11 fino alla 16
+            lastenter2 = lastenter2.substring(11, 16);
+            //sostituisce negli ultimi accessi l'orario appena creato 
+            this.date_last_access.splice(this.active_chat, 1, lastenter2);
+            //sostituisce il valore della variabile now al valore della key data dell'ogetto modello
+            this.newobjet.date = now;
+            //sostituisce il valore della key messageNew  al valore della key message dell'ogetto modello
+            this.newobjet.message = this.messageNew;
+            //inserisce all'interno dell'array contacts l'oggetto modello appena modificato
+            this.contacts[this.active_chat].messages.push({ ...this.newobjet });
+            //reseta i valori d'input di messageNew
+            this.messageNew = null;
+            //cambia il valore di nowWriting in true
+            this.nowWriting = true;
+
+            },
+        /**Ask new mess
+         * 
+         */
+            ask_new_mess() {
+
+            //cambia il valore di accounstWriting
+            this.accounstWriting = false;
+            //crea una variabile con contenuto la quantità di stringe dell'array random_answers meno uno
+            let message_index = this.random_answers.length - 1;
+            //crea una variabile con contenuto un numero random compreso tra  0 e  message_index
+            let random_index = Math.floor(Math.random() * message_index);
+            //inserisce una stringa in modo random dell'array random_answers al valore della key message dell'ogetto modello
+            this.newobjet.message = this.random_answers[random_index];
+            //inseriresce in valore received   al valore della key status dell'ogetto modello
+            this.newobjet.status = 'received';
+            //inserisce all'interno dell'array contacts l'oggetto modello appena modificato
+            this.contacts[this.active_chat].messages.push({ ...this.newobjet });
+            //resetta il valore della key message dell'ogetto modello
+            this.newobjet.message = '';
+            //resetta il valore della key status dell'ogetto modello
+            this.newobjet.status = 'sent';
+            //cambia il valore di accounstWriting
+            this.accounstWriting = false;
+            //cambia il valore di online
+            this.online = true;
+
+            },
+        /**New mess full
+         * 
+         */
+            new_mess_full() {
+
+            //condizione:se la parola inserita non è null
             if (this.messageNew.trim() != null) {
+                //usa la funzione genereted_new_mess per la creazione del nuovo messaggio 
                 this.genereted_new_mess();
+                //cambia il valore di accounstWriting
                 this.accounstWriting = true
-
-
-                setTimeout(() => { this.online = false }, 5000)
-
+                //inizia un timeout di 5s
                 setTimeout(() => {
+
+                    //al termi del timeout resetta il valore di online
+                    this.online = false 
+
+                }, 5000)
+                //inzia un timeout di 1s
+                setTimeout(() => {
+
+                    //al termi del timeout usa la funzione ask_new_mess per la creazione del  messaggio di risposta
                     this.ask_new_mess()
+                    //resetta il valore di accounstWriting
                     this.accounstWriting = false
+
                 }, 1000);
 
             }
 
-        },
+            },
+        /**Message deletion
+         * 
+         * @param {Number} i 
+         */
+            message_deletion(i) {
 
+                //cancellazione messaggio in posizione i
+                this.contacts[this.active_chat].messages.splice(i, 1)
 
+            },
+        /**Last Enter
+         * 
+         * @returns 
+         */    
+            last_enter_Methods() {
 
-
-        showmenu() {
-            this.showMenus = !this.showMenus
-
-        },
-        removemess(i) {
-            this.contacts[this.activechat].messages.splice(i, 1)
-        },
-        logremove(i) {
-            console.log(i);
-            console.log(this.contacts[this.activechat].messages);
-            console.log(this.contacts[this.activechat].messages[i]);
-        },
-        lastenter() {
+            //cicla nell Array prendendo con elemento e indice
             this.contacts.forEach((contatto, index) => {
+
+                //crea una variabile con valore l'indice dell'ultimo messaggio 
                 let position_last_mess = (contatto.messages.length) - 1
-                let lastenter2 = String(contatto.messages[position_last_mess].date)
-                lastenter2 = lastenter2.substring(11, 16)
-                this.lastAcces = lastenter2
-                this.datelastaccess.splice(index, 1, lastenter2)
-                return this.lastAcces
+                //crea una variabile con la data dell messaggio con indice position_last_mess
+                let data_last_enter = String(contatto.messages[position_last_mess].date)
+                //sovrascrive il valore con solo gli elementi in posizione 11 fino alla 16
+                data_last_enter = data_last_enter.substring(11, 16)
+                //sostituisce il valore di last_acces con data_last_enter
+                this.last_acces = data_last_enter
+                //inserisce il valore di data_last_enter dentro date_last_access in posizione index
+                this.date_last_access.splice(index, 1, data_last_enter )
+                //ritorna il valore di last_acces
+                return this.last_acces
 
             })
-        },
 
+            },
+        /**Date now
+         * 
+         * @returns 
+         */
+            date_now() {
 
-        datenow() {
-
+            //crea una variabile e inserisce il valore di getDate()
             let giorno = new Date().getDate()
+            //condizione :se il valore della variabile è uguale o inferiore a nove
             if (giorno <= 9) {
+
+                //aggiunge 0 prima del suo valore
                 giorno = '0' + giorno
+
             }
+
+            //crea una variabile e inserisce il valore di .getMonth() + 1
             let mese = (new Date().getMonth()) + 1
+            //condizione :se il valore della variabile è uguale o inferiore a nove
+            if (mese <= 9) {
 
+                //aggiunge 0 prima del suo valore
+                mese = '0' + mese
+
+           }
+            //crea una variabile e inserisce il valore di .getFullYear()
             let anno = new Date().getFullYear()
+            //crea una variabile e inserisce il valore di getHours()
             let ora = new Date().getHours()
+            //crea una variabile e inserisce il valore di getMinutes()
             let minuti = new Date().getMinutes()
+            //condizione :se il valore della variabile è uguale o inferiore a nove
             if (minuti <= 9) {
-                minuti = '0' + minuti
-            }
-            return ` ${giorno}/0${mese}/${anno} ${ora}:${minuti}:00 `
 
-        },
-        showLastAccess() {
-            if (this.contacts[this.activechat].messages.length < 1) {
-                return this.datelastaccess[this.activechat]
-            } else {
-                return this.last_acces
+                 //aggiunge 0 prima del suo valore
+                 minuti = '0' + minuti
+
             }
-        },
+
+            //ritorna la stringa con la data completa
+            return ` ${giorno}/${mese}/${anno} ${ora}:${minuti}:00 `
+
+
+
+            },
         showLastEnter(contatto, index) {
             if (contatto.messages.length < 1) {
-                return this.datelastaccess[index]
+                return this.date_last_access[index]
             } else {
                 return this.lastenter(contatto)
             }
         },
-        last_acces() {
-            let position_last_mess = (this.contacts[this.activechat].messages.length) - 1
-            let lastenter2 = String(this.contacts[this.activechat].messages[position_last_mess].date)
+        last_acces_Methods() {
+            let position_last_mess = (this.contacts[this.active_chat].messages.length) - 1
+            let lastenter2 = String(this.contacts[this.active_chat].messages[position_last_mess].date)
             lastenter2 = lastenter2.substring(11, 16)
 
-            this.datelastaccess.splice(this.activechat, 1, lastenter2)
+            this.date_last_access.splice(this.active_chat, 1, lastenter2)
             return lastenter2
         },
-        lastmess(user){
+        lastmess(user) {
             if (user.messages.length != 0) {
-                return user.messages[(user.messages.length)- 1].message
-            }else{
+                return user.messages[(user.messages.length) - 1].message
+            } else {
                 return null
             }
-            
+
         },
-        deleteAllMessages(){
+        deleteAllMessages() {
             const arrayvuoto = []
-            this.contacts[this.activechat].messages = arrayvuoto
+            this.contacts[this.active_chat].messages = arrayvuoto
         },
-        deleteChat(){
-            
-            this.contacts.splice(this.activechat,1)
+        deleteChat() {
+
+            this.contacts.splice(this.active_chat, 1)
         },
-        addNew_Contact(){
-            this.newAccount.name = this.newNameContact
-            this.newAccount.avatar = this.optionvalue
-            this.contacts.push(this.newAccount)
-            
-        }
+        addNew_Contact() {
+            let newAccount = {
+                name: '',
+                avatar: '',
+                visible: true,
+                messages: []
+            }
+            newAccount.name = this.newNameContact
+            newAccount.avatar = this.optionvalue
+            this.contacts.unshift(newAccount)
+            this.newNameContact = ''
+            this.optionvalue = ''
+
+
+        },
+        showpannelnewaccount() {
+            this.newaccountpannelshow = !this.newaccountpannelshow
+        },
     },
 
     computed: {
+        
+        
+        lunghezzamessaggio() {
+            return Number((this.contacts[this.active_chat].messages.length) - 1)
+        },
         lastAccesView() {
             if (this.online || this.accounstWriting) {
                 return false
@@ -349,7 +448,7 @@ const app = createApp({
             }
         },
         search_name() {
-            if (this.search != '' && this.contacts[this.activechat].messages.length > 1) {
+            if (this.search != '' && this.contacts[this.active_chat].messages.length > 1) {
                 this.confronto()
 
             } else {
@@ -363,21 +462,22 @@ const app = createApp({
         confronto() {
             this.contacts.forEach(contatto => {
                 if (contatto.name.toLowerCase().includes(this.search.toLowerCase())) {
-                    
+
                     contatto.visible = true
-                  
+
                 } else {
-                    
+
                     contatto.visible = false
-                    
+
                 }
             })
 
         },
+
     },
     mounted() {
-        this.last_acces(),
-            this.lastenter()
+        this.last_acces_Methods()
+        this.last_enter_Methods()
     }
 })
 

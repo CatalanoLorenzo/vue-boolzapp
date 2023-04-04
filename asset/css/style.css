@@ -81,4 +81,5 @@
 .add_account img{
     width: 100%;
     aspect-ratio: 1;
+    display: flex;
 }
