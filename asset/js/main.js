@@ -1,9 +1,9 @@
-
-
+/* import Picker from './emoji-picker.js';
+console.log(Picker); */
 const { createApp } = Vue
 
+
 const app = createApp({
-    
 
 
     data() {
@@ -192,11 +192,25 @@ const app = createApp({
             now_writing: false,
             account_writing: false,
             online: false,
+            showEmoji: false,
             random_answers: ['ok', 'va Bene', 'no!', 'vai a farmi un frappè']
         }
     },
     methods: {
-        
+        onSelectEmoji(emoji) {
+            console.log(emoji)
+            this.messageText += emoji.i;
+            /*
+              // result
+              { 
+                  i: "😚", 
+                  n: ["kissing face"], 
+                  r: "1f61a", // with skin tone
+                  t: "neutral", // skin tone
+                  u: "1f61a" // without tone
+              }
+              */
+        },
         /** Chage_active_chat
          * 
          * @param {Number} index 
@@ -497,7 +511,10 @@ const app = createApp({
             }
 
         },
-        
+   /*      // Inserts emojis
+    onSelectEmoji(emoji) {
+      this.newMessage += emoji.i;
+    }, */
     },
     computed: {
 
@@ -553,6 +570,5 @@ const app = createApp({
         //utilizza la funzione last_enter_Methods
         this.last_enter_Methods()
     }
-})
+})/* .component('Picker', Picker) */.mount('#app')
 
-app.mount('#app')

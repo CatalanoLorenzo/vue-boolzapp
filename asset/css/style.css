@@ -133,6 +133,7 @@
             .show_users{
                 height: 100%;
                 padding-bottom: 9rem;
+                background-color: white;
             }
         /* #endregion list of contacts */
 /* #endregion user */
@@ -152,6 +153,9 @@
             }
         /* #endregion link for last mess */
         /* #region genereted messages */
+            .select_account{
+                background-color: #b1b1b1;
+            }
         /* #endregion genereted messages */
     /* #endregion chat */
 /* #endregion main */
