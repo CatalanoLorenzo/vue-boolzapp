@@ -100,7 +100,7 @@
                                   </div>
                             </div>
                             <!-- list of contacts-->
-                            <div class="show_users overflow-auto bg-white" >
+                            <div class="show_users overflow-scroll bg-white" >
                                 <!-- genereted contacts -->
                                 <div class="show_user bg-white " v-for="(user,index) in contacts" @click="chage_active_chat(index)" >
                                     <div class="d-flex align-items-center bg-white p-2" v-if="user.visible">
@@ -163,7 +163,11 @@
                             <!-- text area -->
                             <div class="area_texting px-5 overflow-auto  " >
                                 <!-- link for last mess -->
-                                <a :href="'#'+'messaggio' + message_length">ultimo messaggio letto</a>
+                                <a :href="'#'+'messaggio' + message_length" class="position-absolute last_mess">
+                                    <div class="circle bg-light text-center ">
+                                        <i class="fa-solid fa-angles-down"></i>
+                                    </div>
+                                </a>
                                 <!-- genereted messages -->
                                 <div class="message py-3 d-flex " v-for="(mess,index) in contacts[active_chat].messages" :class="mess.status == 'sent' ? 'justify-content-end' : 'align-items-start'">
                                     <div class="text d-flex rounded-2 " :id="'messaggio' + index " :class="mess.status" @click="showmenu ">

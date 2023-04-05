@@ -1,105 +1,159 @@
-/* utilitis */
-.circle{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    overflow: hidden;
+/* #region ROOT */
+:root{
+    --bg-primary :#009688;
+    --bg-secondary: #dcdbd2;
+    --mess--sent:#d5f9ba;
+    --bg-menu: #eaeaea;
+    --nav-icon: #b1b1b1;
+    --bg-banner: #8edafc;
 }
-.sent{
-    background-color: #d5f9ba;
-    max-width: 50%;
-    align-items: end;
-}
-.received{
-    background-color: white;
-    max-width: 50%;
-}
-.date{
-    font-size: 0.5rem;
-    text-align: end;
-}
-/* background */
-.background{
-    height: 100vh;
-    background: linear-gradient(to bottom, #009688 10%, #dcdbd2 10%);
-    z-index: -3;
-}
-.logo_promo{
-    width: 100vw;
-    height: 100vh;
-}
-.cont{
-    filter: brightness(20%);
-}
-.container{
-    z-index: 1;
-}
-/* Users */
-.users header,.mess header{
-    background-color: #eaeaea;
-    height: 10vh;
-    border: 1px solid lightgray;
-}
-/* userprofile */
-.circle img{
-    width: 100%;
-    object-fit: cover;
-}
-.navicon{
-    color: #b1b1b1;
-}
-.users main, .mess main{
-    height: 80vh;
-}
-/* notific */
-.users main .notific{
-    background-color: #8edafc;
-}
-.notific .circle {
-    background-color: white;
-}
-.notific .circle i{
+/* #endregion ROOT */
+/* #region utilitis */
+    .circle{
+        height: 40px;
+        width: 40px;
+        margin: 0.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .circle img{
+        width: 100%;
+        object-fit: cover;
+    }
+    .sent{
+        background-color: var(--mess--sent); 
+        max-width: 50%;
+        align-items: end;
+    }
+    .received{
+        background-color: white;
+        max-width: 50%;
+    }
+    .date{
+        font-size: 0.5rem;
+        text-align: end;
+    }
+    .brightness{
+        filter: brightness(1);
 
-    color: #8edafc;
-}
-.mess main{
-    background-image: url(../img/mine.jpg);
-}
-.show_users{
-    max-width: 100%;
-    min-height: 100%;
-}
-.nav_texing i{
- font-size: 1.25rem;
- color: #b1b1b1;
-}
-.mess main footer{
-    bottom: 0;
-    background-color: #eaeaea;
-    color: #b1b1b1;
-    
-}
-.area_texting{
-    height: 100%;
-}
-.menu_a_tendina{
-    right: 0;
-}
-.add_account{
-    z-index: 2;
-}
-.add_account img{
-    width: 100%;
-    aspect-ratio: 1;
-    display: flex;
-}
-.banner_of_welcome{
-    position: fixed;
-    top: 50vh;
-    left: 30vw;
-    z-index: 30;
-}
-.brightness{
-    filter: brightness(1);
+    }
+    .cont{
+        filter: brightness(20%);
+    }
+/* #endregion utilitis */
+/* #region background */
+    .background{
+        height: 100vh;
+        background: linear-gradient(to bottom, var(--bg-primary) 10%, var(--bg-secondary) 10%);
+        z-index: -3;
+    }
+/* #endregion background */
+/* #region banner welcom */
+    .banner_of_welcome{
+        position: fixed;
+        top: 50vh;
+        left: 30vw;
+        z-index: 30;
+    }
+/* #endregion banner welcom */
+/* #region logo */
+    .logo_promo{
+        width: 100vw;
+        height: 100vh;
+    }
+/* #endregion logo */
+/* #region header */
+    .users header,.mess header{
+        background-color: var(--bg-menu);
+        max-height: 10vh;
+        min-height: 70px;
+        border: 1px solid lightgray;
+    }
+    /* #region user */
+        /* #region menu for generated account */    
+            .add_account{
+                z-index: 2;
+            }
+            .add_account img{
+                width: 100%;
+                aspect-ratio: 1;
+                display: flex;
+            }
+        /* #endregion menu for generated account */
+        /* #region icon for nav */
+            .navicon{
+                color: var(--nav-icon) ;
+            }
+        /* #endregion icon for nav */
+    /* #endregion user */
+    /* #region chat */
+        /* #region info contact select */
+        /* #endregion info contact select */
+        /* #region option nav */
+            .nav_texing i{
+                font-size: 1.25rem;
+                color: var(--nav-icon);
+            }
+            .menu_a_tendina{
+                right: 0;
+            }
+        /* #endregion option nav */
+    /* #endregion chat */
 
-}
+/* #endregion header */
+/* #region main */
+    .users main, .mess main{
+        height: 80vh;
+    }
+    /* #region user */
+        /* #region banner for ability notific */
+            .users main .notific{
+                background-color: var(--bg-banner) ;
+            }
+            .notific .circle {
+                background-color: white;
+            }
+            .notific .circle i{
+                color: var(--bg-banner);
+            }
+        /* #endregion banner for ability notific */
+        /* #region search bar */
+        /* #endregion search bar */
+        /* #region list of contacts */
+            .show_users{
+                height: 100%;
+                padding-bottom: 9rem;
+            }
+        /* #endregion list of contacts */
+/* #endregion user */
+    /* #region chat */
+        .mess main{
+            background-image: url(../img/mine.jpg);
+        }
+        /* #region text area */
+            .area_texting{
+                height: 100%;
+                background-image: url(/img/mine.png);
+            }
+        /* #endregion text area */
+        /* #region link for last mess */
+            .last_mess{
+                bottom: 5rem;
+                right: 2rem;
+                z-index: 5;
+                line-height: 2.5rem;
+            }
+        /* #endregion link for last mess */
+        /* #region genereted messages */
+        /* #endregion genereted messages */
+    /* #endregion chat */
+/* #endregion main */
+/* #region footer */
+    /* #region chat */
+        .mess main footer{
+            bottom: 0;
+            background-color: var(--bg-menu);
+            color: var(--nav-icon);
+        }
+    /* #endregion chat */
+/* #endregion footer */
