@@ -12,9 +12,12 @@
 <body>
     <div class="background" >
         <div id="app">
+          
             <img class="logo_promo" src="./img/Boolzapp-promo.png" alt="" v-if="logo_show">
             <div class="container pt-3 " v-else>
-
+                <div v-show="show_banner" :class="!show_banner ? 'brightness' : 'cont'" class="bg_banner_welcome bg-dark">
+                </div>
+                
                 <div class="banner_of_welcome brightness bg-white" v-show="show_banner" >
                     <i class="fa-solid fa-reply-all"></i>
                     <p>seleziona un contatto dalla lista </p>
@@ -22,8 +25,6 @@
                 </div>
 
                 <div class="row" :class="!show_banner ? 'brightness' : 'cont'">
-
-                    
 
                     <!-- left -->
                     <div class="users col-4 p-0">
@@ -143,10 +144,10 @@
                             <!-- option nav -->
                             <div class="nav_texing d-flex align-items-center">
                                 <!-- icon menu -->
-                                <i class="fa-solid fa-magnifying-glass "></i>
-                                <i class="fa-solid fa-paperclip "></i>
+                                <i class="fa-solid fa-magnifying-glass px-1"></i>
+                                <i class="fa-solid fa-paperclip px-1"></i>
                                 <!-- menu for delete mess and chat -->
-                                <div class="menu_a_tendina">
+                                <div class="menu_a_tendina px-1">
                                     <div class="dropdown">
                                         <button class="border-0 "  type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-ellipsis-vertical "></i>
@@ -214,8 +215,10 @@
                         </main>
                         
                     </div>
+
                 </div>
             </div>
+            
         </div>
     </div>
    

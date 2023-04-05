@@ -38,7 +38,7 @@
 
     }
     .cont{
-        filter: brightness(20%);
+        opacity: 50%;
     }
 /* #endregion utilitis */
 /* #region background */
@@ -55,11 +55,21 @@
         left: 30vw;
         z-index: 30;
     }
+    .bg_banner_welcome{
+        width: 100vw;
+        position: absolute;
+        height: 100vh;
+        top: 0;
+        left: 0;
+    }
+    
 /* #endregion banner welcom */
 /* #region logo */
     .logo_promo{
+        opacity: 100%;
         width: 100vw;
         height: 100vh;
+        z-index: 100;
     }
 /* #endregion logo */
 /* #region header */
