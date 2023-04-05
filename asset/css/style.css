@@ -137,9 +137,6 @@
         /* #endregion list of contacts */
 /* #endregion user */
     /* #region chat */
-        .mess main{
-            background-image: url(../img/mine.jpg);
-        }
         /* #region text area */
             .area_texting{
                 height: 100%;

@@ -1,8 +1,9 @@
 
 
 const { createApp } = Vue
-const app = createApp({
 
+const app = createApp({
+    
 
 
     data() {
@@ -195,7 +196,7 @@ const app = createApp({
         }
     },
     methods: {
-
+        
         /** Chage_active_chat
          * 
          * @param {Number} index 
@@ -220,14 +221,12 @@ const app = createApp({
          */
         genereted_new_mess() {
 
+            //implemento la libreria luxon
+            const DateTime = luxon.DateTime;
             //crea una variabile e ha come contenuto la data attuale
-            let now = this.date_now();
-            //crea una variabile il cui contenuto è la variabile di prima a stringa
-            let lastenter2 = String(now);
-            //prende dalla stringa solo gli elementi in posizione 11 fino alla 16
-            lastenter2 = lastenter2.substring(11, 16);
+            let now = DateTime.now().toLocaleString(DateTime.TIME_24_SIMPLE)
             //sostituisce negli ultimi accessi l'orario appena creato 
-            this.date_last_access.splice(this.active_chat, 1, lastenter2);
+            this.date_last_access.splice(this.active_chat, 1, now);
             //sostituisce il valore della variabile now al valore della key data dell'ogetto modello
             this.newobjet.date = now;
             //sostituisce il valore della key message_new  al valore della key message dell'ogetto modello
@@ -333,57 +332,11 @@ const app = createApp({
             })
 
         },
-        /**Date now
-         * 
-         * @returns 
-         */
-        date_now() {
-
-            //crea una variabile e inserisce il valore di getDate()
-            let giorno = new Date().getDate()
-            //condizione :se il valore della variabile è uguale o inferiore a nove
-            if (giorno <= 9) {
-
-                //aggiunge 0 prima del suo valore
-                giorno = '0' + giorno
-
-            }
-
-            //crea una variabile e inserisce il valore di .getMonth() + 1
-            let mese = (new Date().getMonth()) + 1
-            //condizione :se il valore della variabile è uguale o inferiore a nove
-            if (mese <= 9) {
-
-                //aggiunge 0 prima del suo valore
-                mese = '0' + mese
-
-            }
-            //crea una variabile e inserisce il valore di .getFullYear()
-            let anno = new Date().getFullYear()
-            //crea una variabile e inserisce il valore di getHours()
-            let ora = new Date().getHours()
-            //crea una variabile e inserisce il valore di getMinutes()
-            let minuti = new Date().getMinutes()
-            //condizione :se il valore della variabile è uguale o inferiore a nove
-            if (minuti <= 9) {
-
-                //aggiunge 0 prima del suo valore
-                minuti = '0' + minuti
-
-            }
-
-            //ritorna la stringa con la data completa
-            return ` ${giorno}/${mese}/${anno} ${ora}:${minuti}:00 `
-
-
-
-        },
         /**Last acces Methods
          * 
          * @returns 
          */
         last_acces_Methods() {
-
             //crea una variabile e le assegna i numero di messaggi contacts[this.active_chat]
             let position_last_mess = (this.contacts[this.active_chat].messages.length) - 1
             // crea una variabile e le asseggna la data dell'ultimo messaggio di contacts[this.active_chat]
